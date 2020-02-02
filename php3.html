@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        html {
+            width: 900px;
+            margin: auto;
+        }
+        .button{
+            border-radius: 50%;
+            font-variant: small-caps;
+            font-size: 80%;
+        }
+        #form{
+            border: 2px solid black;
+            border-radius: 10px;
+            padding: 15px;
+            background: lightgray;
+            margin:20px 10px 10px;
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+        /* html{
+            border: 2px solid black;
+            border-radius: 15px;
+            margin: 15px 10px 5px;
+        }
+        */
+        .texts{
+            border: 2px solid black;
+            width: 500px;
+            height: 100px;
+            /*margin-left: 30px;*/
+            position: relative;
+            top: 200px;
+            border-radius: 20px;
+        }
+        .texts .msg_inp{
+            display: block;
+            width: 96%;
+            height: 85%;
+            margin: auto;
+            margin-top: 4px;
+            resize: none;
+            border: none;
+        }
+        .t_msg{
+            position: absolute;
+            height: 10px;
+            width: 10px;
+            display: block;
+            padding: 0;
+            border: none;
+            background: none;
+            opacity: 60%;
+            top: 5px;
+        }
+        #butt1{
+            right: 15px;
+            top: 5px;
+        }
+        #butt3{
+            right: 30px;
+        }
+        .tags{
+            width: 50px;
+            position: absolute;
+            top: -20px;
+            right: 20px;
+        }
+    </style>
+    <style>
+        .avatar{
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: inherit;
+}
+        .msg{
+    padding-left: 20px;
+    width: 500px;
+}
+.msg_photo, .msg_info{
+    display: inline-block;
+}
+.msg_txt{
+    line-height: 18px;
+}
+.msg_txt{
+    line-height: 18px;
+}
+.msg_info a{
+    text-decoration: none rgb(66, 100, 139);
+    color: rgb(66, 100, 139);
+    font-size: 12,5px;
+    font-weight: 700;
+}
+.msg_info span{
+    color:rgba(120, 127, 140, 0.6);
+}
+.msg_info a:hover{
+    text-decoration: underline solid rgb(66, 100, 139);
+}
+.msg_info{
+    position: relative;
+    top: -20px;
+}
+.msg_msg{
+    position: relative;
+    left: 40px;
+    top: -20px;
+}
+.msg{
+    padding-left: 20px;
+    width: 500px;
+    margin-top: 40px;
+}
+    </style>    
+</head>
+<body>
+    <!-- <div class="msgs">
+        <div class="msg">
+            <div class="msg_photo">
+                <a>
+                    <img class="avatar" src="">
+                </a>
+            </div>
+            <div class="msg_info">
+                <a>Вова Воропаев</a>
+                <span>13:50</span>
+            </div>
+            <ul class="msg_msg">
+                <li class="msg_txt">+</li>
+            </ul>
+    </div>         -->
+</div>
+    <form id='form' name='test'  method="post" enctype = multipart/form-data action=''>
+        <div class='fio'>
+            <h4 style='margin-top:0px;'>Фамилия <input type='text' name='fio1'></h4>
+            <h4>Имя <input type='text' name='fio2'></h4>
+            <h4>Отчество <input type='text' name='fio3'></h4>
+        </div>
+        <h4>Дата рождения <input type='date' name='date'></h4>
+        <h4>Адрес проживания <input type='text' name='adres'></h4>
+        <h4>Аватар <input type='file' name='av' style='border: 1px solid black; padding: 3px; border-radius: 3px'></h4>
+        <img id='av_prev' src='' style='display:block;width: 100px;height:100px;display:none; border: 1px solid black'>
+        <!-- <h4>Комментарий <input type='text' name='text'></h4> -->
+        <h3 id='123' style='display: none'>Все поля обязательны к заполнению</h3>
+        <h3 id='456' style='display: none'>Загрузите картинку для аватара</h3>
+        <input class="button" type='submit'>
+        <input class="button" type='reset'>
+    </form>
+    <form id='mess' name='mess'  method="post" enctype = multipart/form-data action=''>
+        <div class='texts'>
+        <textarea class="msg_inp"></textarea>
+        <button class="t_msg" id='butt1'>id</button>
+        <button style="right: 50px;" class="t_msg" id='butt2'>tags</button class="t_msg">
+        <input name='msg' type="hidden">
+        <input class="button" type='submit' id='butt'>
+        </div>
+    </form>
+<script>
+    window.onload = test();
+    function test(){
+        form = document.forms.test;
+        form['av'].onchange = function(ob){test2(ob)}
+    }
+    function test2(ob){
+        if(!ob.target.files.length > 0){
+            return
+        }
+        var img = document.getElementById('av_prev');
+        console.log(ob.target.files[0]);
+        var src = URL.createObjectURL(ob.target.files[0]);
+        img.src = src;
+        img.style.display = 'block';
+    }                 
+</script>
+<script src='script.js'></script>
+</body>
+</html>
