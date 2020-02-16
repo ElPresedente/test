@@ -20,34 +20,60 @@ function load_msg(){
     data.append('addData', 'load_msg');
     ans = JSON.parse(send(data));
     console.log(ans);
-    for(i=0; i<ans.length;i++){
-        msg = ans[i];
-        console.log(i);
+    var h = 0;
+    console.log('h=',h);
+    var g = ans.length;
+    for(i=0; h<g;){
+        i++;
+        if(i >100){return}
+        msg = ans[h];
+        console.log(i, h);
+        
         if(msg.id == buff.id || buff.id == 0){
-            console.log(i + ' +');
+            console.log(h + ' +');
             if(buff.id == 0){buff.msg_arr = new Array();}
             buff.id = msg.id;
             buff.msg_arr[buff.msg_arr.length] = msg.msg;
+            if(h !=(ans.length-1)){h++;}
+            else{buff.id = Math.random()}
+            
         }
         else{
-            console.log(i + ' -');
-            msg1 = ans[i-1];
+            console.log(h + ' -');
+            msg1 = ans[h-1];
             var txt = create_msg(msg1.name[1], msg1.name[0], '00:00', buff.msg_arr);
             document.getElementsByClassName('msgs')[0].appendChild(txt);
+            console.log(txt)
             buff.id = 0;
             delete buff.msg_arr;
-            i = i-1;
         }
-        if(i==(ans.length-1)){
-            console.log(i + ' -');
-            if(i==0){
-                msg1 = ans[i];
+        console.log(buff);
+        if(h==(ans.length-1)){
+            console.log(h + ' -');
+            if(h==0){
+                msg1 = ans[h];
             }
             else{
-                msg1 = ans[i-1];
+                msg1 = ans[h];
             }
-            var txt = create_msg(msg1.name[1], msg1.name[0], '00:00', buff.msg_arr);
-            document.getElementsByClassName('msgs')[0].appendChild(txt);
+            console.log(buff)
+            if(msg1.id != buff.id){
+                var txt1 = create_msg(msg.name[1], msg.name[0], '00:00', buff.msg_arr);
+                document.getElementsByClassName('msgs')[0].appendChild(txt1);
+                delete buff.msg_arr; buff.msg_arr = new Array();
+                buff.msg_arr[buff.msg_arr.length] = msg1.msg;
+                var txt1 = create_msg(msg1.name[1], msg1.name[0], '00:00', buff.msg_arr);
+                document.getElementsByClassName('msgs')[0].appendChild(txt1);
+            }
+            else{
+                buff.msg_arr[buff.msg_arr.length] = msg1.msg;
+                var txt1 = create_msg(msg1.name[1], msg1.name[0], '00:00', buff.msg_arr);
+                document.getElementsByClassName('msgs')[0].appendChild(txt1);
+            }
+            // var txt1 = create_msg(msg.name[1], msg.name[0], '00:00', buff.msg_arr);
+            // document.getElementsByClassName('msgs')[0].appendChild(txt1);
+            console.log(txt1);
+            console.log(msg1);
             return;
         }
     }
